@@ -1,0 +1,38 @@
+{
+  "name": "hypernova-angular",
+  "version": "0.1.1",
+  "description": "Angular Bindings for Hypernova",
+  "main": "lib/index.js",
+  "author": "Felipe Guizar Diaz <felipegaiacharly@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "hypernova",
+    "ssr",
+    "isomorphic"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:marconi1992/hypernova-angular.git"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "lint": "eslint src",
+    "build": "babel src -d lib"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-airbnb": "^2.5.3",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=5.0.0",
+    "@angular/platform-browser": ">=5.0.0",
+    "@angular/platform-server": ">=5.0.0",
+    "@angular/platform-browser-dynamic": ">=5.0.0",
+    "hypernova": "^2.5.0",
+    "rxjs": ">=5.0.0"
+  }
+}
