@@ -32,7 +32,7 @@ const getServerAppModule = (Component, Module) => {
   })(AppModule);
 };
 
-const getBrowserAppModule = (Component, Module, node) => {
+const getBrowserAppModule = (Component, Module, node, propsData) => {
   function AppModule() {
     this.ngDoBootstrap = (app) => {
       app.bootstrap(Component, node);
@@ -44,6 +44,12 @@ const getBrowserAppModule = (Component, Module, node) => {
       BrowserModule.withServerTransition({ appId: APP_ID }),
     ],
     entryComponents: [Component],
+    providers: [
+      {
+        provide: HYPERNOVA_DATA,
+        useValue: propsData,
+      },
+    ],
   })(AppModule);
 };
 
@@ -92,14 +98,9 @@ export const renderAngular = (name, Component, Module) => hypernova({
       payloads.forEach((payload) => {
         const { node, data: propsData } = payload;
 
-        const BrowserAppModule = getBrowserAppModule(Component, Module, node);
+        const BrowserAppModule = getBrowserAppModule(Component, Module, node, propsData);
 
-        platformBrowserDynamic([
-          {
-            provide: HYPERNOVA_DATA,
-            useValue: propsData,
-          },
-        ]).bootstrapModule(BrowserAppModule);
+        platformBrowserDynamic().bootstrapModule(BrowserAppModule);
       });
     }
     return Component;

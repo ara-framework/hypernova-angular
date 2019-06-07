@@ -1,6 +1,6 @@
 {
   "name": "hypernova-angular",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Angular Bindings for Hypernova",
   "main": "lib/index.js",
   "author": "Felipe Guizar Diaz <felipegaiacharly@gmail.com>",
