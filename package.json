@@ -1,6 +1,6 @@
 {
   "name": "hypernova-angular",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Angular Bindings for Hypernova",
   "main": "lib/index.js",
   "author": "Felipe Guizar Diaz <felipegaiacharly@gmail.com>",
@@ -21,8 +21,10 @@
     "build": "babel src -d lib"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-airbnb": "^2.5.3",
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/runtime": "^7.7.2",
+    "babel-preset-airbnb": "^4.1.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0"
@@ -30,9 +32,10 @@
   "peerDependencies": {
     "@angular/core": ">=5.0.0",
     "@angular/platform-browser": ">=5.0.0",
-    "@angular/platform-server": ">=5.0.0",
     "@angular/platform-browser-dynamic": ">=5.0.0",
+    "@angular/platform-server": ">=5.0.0",
     "hypernova": "^2.5.0",
+    "nova-helpers": "^1.0.1-alpha.0",
     "rxjs": ">=5.0.0"
   }
 }

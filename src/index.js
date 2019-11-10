@@ -12,6 +12,24 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { NgModule, ApplicationRef } from '@angular/core';
 
+import { findNode, getData } from 'nova-helpers';
+
+export { load } from 'hypernova';
+
+export const loadById = (name, id) => {
+  const node = findNode(name, id);
+  const data = getData(name, id);
+
+  if (node && data) {
+    return {
+      node,
+      data,
+    };
+  }
+
+  return null;
+};
+
 const APP_ID = 'hypernova';
 
 export const HYPERNOVA_DATA = 'Hypernova.Data';
@@ -81,6 +99,12 @@ const renderServer = (ServerAppModule, propsData) => {
     });
 };
 
+export const mountComponent = (Component, Module, node, propsData) => {
+  const BrowserAppModule = getBrowserAppModule(Component, Module, node, propsData);
+
+  platformBrowserDynamic().bootstrapModule(BrowserAppModule);
+};
+
 export const renderAngular = (name, Component, Module) => hypernova({
   server() {
     return async (propsData) => {
@@ -98,9 +122,7 @@ export const renderAngular = (name, Component, Module) => hypernova({
       payloads.forEach((payload) => {
         const { node, data: propsData } = payload;
 
-        const BrowserAppModule = getBrowserAppModule(Component, Module, node, propsData);
-
-        platformBrowserDynamic().bootstrapModule(BrowserAppModule);
+        mountComponent(Component, Module, node, propsData);
       });
     }
     return Component;
