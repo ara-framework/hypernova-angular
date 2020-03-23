@@ -4,7 +4,9 @@
 
 On the server, wraps the component in a function to render it to a HTML string given its props.
 
-On the client, calling this function with your component scans the DOM for any server-side rendered instances of it. It then resumes those components using the server-specified props.
+On the client, uses the `HypernovaModuleFactory` to provide the metadata necessary to bootstrap the components.
+
+**Note**: `renderAngular` and `mountComponent` are not supported anymore. They were removed to move the boostrapping responsability to the library consumer in order to support AOT and JIT compiling.
 
 ## Install
 
@@ -17,7 +19,7 @@ npm install hypernova-angular
 Uses `renderAngular` to return hypernova bindings.
 
 ```ts
-import { renderAngular } from 'hypernova-angular'
+import { renderAngular } from 'hypernova-angular/server'
 
 import { ExampleModule } from './components/example/example.module'
 import { ExampleComponent } from './components/example/example.component'
@@ -32,13 +34,14 @@ hypernova({
 ```
 
 ## Browser Usage
-You can use [Ara CLI](https://github.com/ara-framework/ara-cli) to support client-side rendering.
+
+You can use [Ara CLI](https://github.com/ara-framework/ara-cli) to create a service (Nova) with everything ready to start.
 
 ```bash
 ara new:nova -t angular
 ```
 
-Also, you can use the following configurations.
+Or, you can use the following configurations.
 
 ### App Module
 
@@ -145,7 +148,7 @@ enableProdMode();
 
 const render = (name: string, placeholder: any) => {
   const hypernovaModuleFactory = new HypernovaModuleFactory(AppModuleNgFactory, name, placeholder);
-  platformBrowser().bootstrapModuleFactory();
+  platformBrowser().bootstrapModuleFactory(hypernovaModuleFactory);
 }
 
 document.addEventListener('NovaMount', (event) => {
